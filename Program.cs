@@ -148,8 +148,27 @@ namespace Uzduotys
             7 5 18 10
             8 6 2 11
             */
-            MatricosPatikrinimas();
+            //MatricosPatikrinimas();
 
+            /*-----------15a uzduotis----------------
+            parašykite programą kuri matricoje 4x4 surastu pasikartojančius skaičius,
+            ir tuos skaičius ir jų išvestų jų vietą
+            9 22 3 19
+            6 16 11 8
+            7 5 18 10
+            8 6 2 11
+            */
+            //PasikartojantysMatricoj();
+
+            /*-----------16a uzduotis----------------
+            parašykite programą kuri matricos 4x4 skaičius surikiuoja nuo mažiausio iki didžiausio,
+            ir visą surikiuotą matricą išveda į ekraną
+            9 22 3 19
+            6 16 11 8
+            7 5 18 10
+            8 6 2 11
+            */
+            //MatricosIsrykiavimas();
 
             //----------------------1os uzduoties metodas--------------
             static void ReadIntNumber()
@@ -489,6 +508,7 @@ namespace Uzduotys
 
             //-------------------13os uzduoties metodas------------------
             static void Palindromas()
+
             {
                 Console.WriteLine("Iveskite sveika palindromini skaiciu arba teksta");
                 var ivestasTekstas = Console.ReadLine();
@@ -573,6 +593,76 @@ namespace Uzduotys
 
                 Console.WriteLine($"Matricos nariu suma lygi {suma}, vidurkis {vidurkis}, maximalus {skaiciukai.Max()}, artimiausias vidurkiui {artimiausias}");
                 
+            }
+
+            static void PasikartojantysMatricoj()
+            {
+                int[,] matrica = new int[4, 4] { { 9, 22, 3, 19, }, { 6, 16, 11, 8, }, { 7, 5, 18, 10, }, { 8, 6, 2, 11, } };
+                int rows = matrica.GetLength(0);
+                int cols = matrica.GetLength(1);
+                List<int> skaiciukai = new List<int> { };
+                List<int> skaiciukaiRykiuoti = new List<int> { };
+                for (int i = 0; i < rows; i++)
+                {
+                    for (int j = 0; j < cols; j++)
+                    {
+                        skaiciukai.Add(matrica[i, j]);
+                        skaiciukaiRykiuoti.Add(matrica[i, j]);
+                    }
+                }
+
+                skaiciukaiRykiuoti.Sort();
+                Console.WriteLine(string.Join(" ", skaiciukaiRykiuoti));
+                for (int i = 1; i < (skaiciukaiRykiuoti.Count-1); i++)
+                {
+                    if (skaiciukaiRykiuoti[i-1] == skaiciukaiRykiuoti[i])
+                    {
+                        for (int k = 0; k < rows; k++)
+                        {
+                            for (int l = 0; l < cols; l++)
+                            {
+                                if (matrica[k, l] == skaiciukaiRykiuoti[i])
+                                {
+                                    Console.WriteLine($"pasikartojantis matricos elementas yra \"{matrica[k, l]}\" ir jo vieta matricoj [{k}, {l}]");
+                                }                                 
+                            }
+                        }
+                    }
+                }
+                
+
+            }
+
+            static void MatricosIsrykiavimas()
+            {
+                int[,] matrica = new int[4, 4] { { 9, 22, 3, 19, }, { 6, 16, 11, 8, }, { 7, 5, 18, 10, }, { 8, 6, 2, 11, } };
+                int[,] matricaRykiuota = new int[4, 4];
+                int rows = matrica.GetLength(0);
+                int cols = matrica.GetLength(1);
+                List<int> skaiciukai = new List<int> { };
+                List<int> skaiciukaiRykiuoti = new List<int> { };
+                for (int i = 0; i < rows; i++)
+                {
+                    for (int j = 0; j < cols; j++)
+                    {
+                        skaiciukai.Add(matrica[i, j]);
+                        skaiciukaiRykiuoti.Add(matrica[i, j]);
+                    }
+                }
+
+                int m = 0;
+                skaiciukaiRykiuoti.Sort();
+                Console.WriteLine(string.Join(" ", skaiciukaiRykiuoti));
+                for (int k = 0; k < rows; k++)
+                {
+                    for (int l = 0; l < cols; l++)
+                    {
+                        matricaRykiuota[k, l] = skaiciukaiRykiuoti[m];
+                        Console.Write($"{matricaRykiuota[k, l]} ");
+                        m++;
+                    }
+                    Console.WriteLine();
+                }
             }
 
         }
